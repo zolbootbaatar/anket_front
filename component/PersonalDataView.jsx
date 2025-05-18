@@ -1,7 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
+const PersonalDataView = ({
+  onChange,
+  defaultValue = [],
+  readOnly = false,
+}) => {
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const months = [
     "1-р сар",
@@ -23,9 +27,9 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
   );
 
   const [formData, setFormData] = useState({
-    jobName: "adasdads",
-    lastName: "asdadsads",
-    fatherName: "asdads",
+    jobName: "",
+    lastName: "",
+    fatherName: "",
     myName: "",
     gender: "",
     birthYear: "",
@@ -45,6 +49,8 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
     emergencyContact3: "",
     relatedWork: "",
     relatedName: "",
+    criminalRecord: "",
+    criminalDetails: "",
   });
 
   useEffect(() => {
@@ -57,11 +63,23 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  // useEffect(() => {
-  //   if (defaultValue && Object.keys(defaultValue).length > 0) {
-  //     setFormData(defaultValue);
-  //   }
-  // }, [defaultValue]);
+  const renderInput = (value, onChange) => {
+    return (
+      <input
+        type="text"
+        value={value || ""}
+        onChange={onChange}
+        disabled={readOnly}
+        className="border border-gray-400 focus:outline-none text-[10px] md:text-[12px] p-1 w-48 max-md:h-[15px] px-2 input-focus-red md:w-96 text-[#0000ff]"
+      />
+    );
+  };
+
+  useEffect(() => {
+    if (defaultValue) {
+      setFormData(defaultValue);
+    }
+  }, [defaultValue]);
 
   return (
     <div className="relative border px-2 border-gray-400 md:p-6 mx-auto">
@@ -79,6 +97,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
           id="jobName"
           value={formData.jobName}
           onChange={(e) => updateField("jobName", e.target.value)}
+          disabled={readOnly}
           className="border border-gray-400 focus:outline-none text-[#0000ff] max-md:h-[15px] px-2 input-focus-red w-48 md:w-80"
         />
       </div>
@@ -94,6 +113,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="lastName"
             value={formData.lastName}
             onChange={(e) => updateField("lastName", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none px-2 input-focus-red max-md:h-[15px] w-20 md:w-41 text-[#0000ff]"
           />
         </div>
@@ -107,6 +127,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="fatherName"
             value={formData.fatherName}
             onChange={(e) => updateField("fatherName", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none px-2 input-focus-red max-md:h-[15px] w-20 md:w-41 text-[#0000ff]"
           />
         </div>
@@ -123,6 +144,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="myName"
             value={formData.myName}
             onChange={(e) => updateField("myName", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none px-2 max-md:h-[15px] input-focus-red w-20 md:w-41  text-[#0000ff]"
           />
         </div>
@@ -139,6 +161,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
                 value="male"
                 checked={formData.gender === "male"}
                 onChange={(e) => updateField("gender", e.target.value)}
+                disabled={readOnly}
               />
               <span>Эрэгтэй</span>
             </label>
@@ -150,6 +173,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
                 value="female"
                 checked={formData.gender === "female"}
                 onChange={(e) => updateField("gender", e.target.value)}
+                disabled={readOnly}
               />
               <span>Эмэгтэй</span>
             </label>
@@ -167,6 +191,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
               name="birthYear"
               value={formData.birthYear}
               onChange={(e) => updateField("birthYear", e.target.value)}
+              disabled={readOnly}
               className="border border-gray-400 max-md:h-[15px] text-[10px] md:text-[12px] text-[#0000ff]"
             >
               <option value="">Он</option>
@@ -185,6 +210,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
               name="birthMonth"
               value={formData.birthMonth}
               onChange={(e) => updateField("birthMonth", e.target.value)}
+              disabled={readOnly}
               className="border border-gray-400  text-[#0000ff] max-md:h-[15px] text-[10px] md:text-[12px]"
             >
               <option value="">Сар</option>
@@ -203,6 +229,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
               name="birthDay"
               value={formData.birthDay}
               onChange={(e) => updateField("birthDay", e.target.value)}
+              disabled={readOnly}
               className="border border-gray-400  text-[#0000ff] max-md:h-[15px] text-[10px] md:text-[12px]"
             >
               <option value="">Өдөр</option>
@@ -229,6 +256,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="birthPlace"
             value={formData.birthPlace}
             onChange={(e) => updateField("birthPlace", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none text-[10px] md:text-[12px] px-2 w-20 md:w-41 max-md:h-[15px] input-focus-red "
           />
         </div>
@@ -255,6 +283,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
                 value={value}
                 checked={formData.married === value}
                 onChange={(e) => updateField("married", e.target.value)}
+                disabled={readOnly}
                 className="text-[10px] md:text-[12px]"
               />
               <span>{label}</span>
@@ -274,6 +303,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="email"
             value={formData.email}
             onChange={(e) => updateField("email", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none px-2 w-26 max-md:h-[15px] p-1 text-[10px] md:text-[12px] md:w-60 input-focus-red text-[#0000ff]"
           />
         </div>
@@ -287,6 +317,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="facebook"
             value={formData.facebook}
             onChange={(e) => updateField("facebook", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none px-2 max-md:h-[15px] w-26 md:w-60 p-1 text-[10px] md:text-[12px] input-focus-red text-[#0000ff]"
           />
         </div>
@@ -305,6 +336,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="currentAddress"
             value={formData.currentAddress}
             onChange={(e) => updateField("currentAddress", e.target.value)}
+            disabled={readOnly}
             rows={3}
             className="border border-gray-400 focus:outline-none max-md:h-[15px] text-[10px] md:text-[12px] p-1 px-2 input-focus-red w-40 md:w-96 text-[#0000ff]"
           />
@@ -318,6 +350,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="tempAddress"
             value={formData.tempAddress}
             onChange={(e) => updateField("tempAddress", e.target.value)}
+            disabled={readOnly}
             rows={3}
             className="border border-gray-400 max-md:h-[15px] text-[10px] md:text-[12px] p-1 px-2 input-focus-red w-40 md:w-96 text-[#0000ff]"
           />
@@ -335,6 +368,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="phoneHome"
             value={formData.phoneHome}
             onChange={(e) => updateField("phoneHome", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 max-md:h-[15px] md:text-[12px] max-md:w-20 text-[10px] p-1 focus:outline-none px-2 input-focus-red text-[#0000ff]"
           />
         </div>
@@ -348,6 +382,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="phoneMobile"
             value={formData.phoneMobile}
             onChange={(e) => updateField("phoneMobile", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 max-md:h-[15px] md:text-[12px] max-md:w-20 text-[10px] p-1 focus:outline-none px-2 input-focus-red text-[#0000ff]"
           />
         </div>
@@ -361,6 +396,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             id="phoneWork"
             value={formData.phoneWork}
             onChange={(e) => updateField("phoneWork", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 max-md:h-[15px] md:text-[12px] max-md:w-20 text-[10px] p-1 focus:outline-none px-2 input-focus-red text-[#0000ff]"
           />
         </div>
@@ -381,6 +417,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             placeholder="1-р хүн"
             value={formData.emergencyContact1}
             onChange={(e) => updateField("emergencyContact1", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none text-[10px] md:text-[12px] p-1 w-48 max-md:h-[15px] px-2 input-focus-red md:w-96 text-[#0000ff]"
           />
         </div>
@@ -394,6 +431,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             placeholder="2-р хүн"
             value={formData.emergencyContact2}
             onChange={(e) => updateField("emergencyContact2", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none text-[10px] md:text-[12px] p-1 w-48 max-md:h-[15px] px-2 input-focus-red md:w-96 text-[#0000ff]"
           />
         </div>
@@ -407,6 +445,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
             placeholder="3-р хүн"
             value={formData.emergencyContact3}
             onChange={(e) => updateField("emergencyContact3", e.target.value)}
+            disabled={readOnly}
             className="border border-gray-400 focus:outline-none text-[10px] md:text-[12px] p-1 w-48 max-md:h-[15px] px-2 input-focus-red md:w-96 text-[#0000ff]"
           />
         </div>
@@ -427,6 +466,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
                 type="radio"
                 checked={formData.criminalRecord === choice}
                 onChange={() => updateField("criminalRecord", choice)}
+                disabled={readOnly}
               />
               <span>{choice}</span>
             </label>
@@ -448,6 +488,7 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
           id="relatedName"
           value={formData.relatedName}
           onChange={(e) => updateField("relatedName", e.target.value)}
+          disabled={readOnly}
           className="border border-gray-400 max-md:h-[15px] focus:outline-none px-2 input-focus-red"
         />
       </div>
@@ -455,4 +496,4 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
   );
 };
 
-export default PersonalData;
+export default PersonalDataView;

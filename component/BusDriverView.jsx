@@ -1,27 +1,31 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const BusDriver = ({ onChange }) => {
+const BusDriver = ({ value }) => {
   const [form, setForm] = useState({
-    fullName: "",
-    registerNumber: "",
-    address: "",
-    phone: "",
-    email: "",
-    companyName: "",
-    companyRegNumber: "",
+    fullName: value?.fullName || "",
+    registerNumber: value?.registerNumber || "",
+    address: value?.address || "",
+    phone: value?.phone || "",
+    email: value?.email || "",
+    companyName: value?.companyName || "",
+    companyRegNumber: value?.companyRegNumber || "",
   });
 
+  // value өөрчлөгдөх үед form-ийн утгыг шинэчлэх
   useEffect(() => {
-    if (onChange) {
-      onChange(form); // өгөгдлийг эцэг компонент руу илгээх
+    if (value) {
+      setForm({
+        fullName: value.fullName || "",
+        registerNumber: value.registerNumber || "",
+        address: value.address || "",
+        phone: value.phone || "",
+        email: value.email || "",
+        companyName: value.companyName || "",
+        companyRegNumber: value.companyRegNumber || "",
+      });
     }
-  }, [form]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
+  }, [value]);
 
   return (
     <div className="relative p-6 border border-gray-400">
@@ -35,7 +39,7 @@ const BusDriver = ({ onChange }) => {
             name="fullName"
             type="text"
             value={form.fullName}
-            onChange={handleChange}
+            readOnly
             className="border border-gray-400 focus:outline-none text-[#0000ff] px-2 w-64 max-w-md"
           />
         </div>
@@ -45,7 +49,7 @@ const BusDriver = ({ onChange }) => {
             name="registerNumber"
             type="text"
             value={form.registerNumber}
-            onChange={handleChange}
+            readOnly
             className="border border-gray-400 focus:outline-none text-[#0000ff] px-2 w-64 max-w-md"
           />
         </div>
@@ -55,7 +59,7 @@ const BusDriver = ({ onChange }) => {
             name="address"
             type="text"
             value={form.address}
-            onChange={handleChange}
+            readOnly
             className="border border-gray-400 focus:outline-none text-[#0000ff] px-2 w-64 max-w-md"
           />
         </div>
@@ -65,7 +69,7 @@ const BusDriver = ({ onChange }) => {
             name="phone"
             type="text"
             value={form.phone}
-            onChange={handleChange}
+            readOnly
             className="border border-gray-400 focus:outline-none text-[#0000ff] px-2 w-64 max-w-md"
           />
         </div>
@@ -75,7 +79,7 @@ const BusDriver = ({ onChange }) => {
             name="email"
             type="email"
             value={form.email}
-            onChange={handleChange}
+            readOnly
             className="border border-gray-400 focus:outline-none text-[#0000ff] px-2 w-64 max-w-md"
           />
         </div>
@@ -87,7 +91,7 @@ const BusDriver = ({ onChange }) => {
             name="companyName"
             type="text"
             value={form.companyName}
-            onChange={handleChange}
+            readOnly
             className="border border-gray-400 focus:outline-none text-[#0000ff] px-2 w-64 max-w-md"
           />
         </div>
@@ -97,7 +101,7 @@ const BusDriver = ({ onChange }) => {
             name="companyRegNumber"
             type="text"
             value={form.companyRegNumber}
-            onChange={handleChange}
+            readOnly
             className="border border-gray-400 focus:outline-none text-[#0000ff] px-2 w-64 max-w-md"
           />
         </div>
