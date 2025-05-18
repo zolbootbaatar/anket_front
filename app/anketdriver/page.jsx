@@ -33,6 +33,7 @@ export default function page() {
   const [dataH, setDataH] = useState({});
   const [systemInfo, setSystemInfo] = useState({});
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [video, setVideo] = useState(null);
   const [videoPreview, setVideoPreview] = useState(null);
 
@@ -55,6 +56,7 @@ export default function page() {
 
   const handleSubmit = async () => {
     try {
+      setSubmitting(true);
       const formData = new FormData();
 
       formData.append("personal", JSON.stringify(dataD));
@@ -91,6 +93,8 @@ export default function page() {
     } catch (error) {
       toast.error("Илгээхэд алдаа гарлаа");
       console.error("Илгээхэд алдаа:", error);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -142,12 +146,9 @@ export default function page() {
           </p>
         </div>
       </div>
-      {/* video оруулах хэсэг */}
-      {/* video хэсэг preview тэй мөн input дээр биш icon дээр дарж видеогоо
-      оруулдаг байх ёстой */}
       <div className="flex flex-col gap-2">
         <label htmlFor="video" className="font-medium">
-          Видео оруулах
+          Машины бичлэг
         </label>
         <div className="border-2 border-dashed border-gray-300 rounded-md p-4 hover:border-[#233882] transition-colors">
           {videoPreview ? (
@@ -182,7 +183,7 @@ export default function page() {
             >
               <FaVideo size={40} color="#233882" />
               <p className="text-gray-500 mt-2">
-                Видео оруулахын тулд энд дарна уу
+                Машины бичлэг оруулахын тулд энд дарна уу
               </p>
             </label>
           )}
@@ -205,9 +206,12 @@ export default function page() {
       <BusDriverDetails onChange={setDataH} />
       <button
         onClick={handleSubmit}
-        className="bg-[#233882] flex justify-center text-white px-4 py-2 mx-auto w-full rounded-md mt-6 font-semibold"
+        disabled={submitting}
+        className={`bg-[#233882] flex justify-center text-white px-4 py-2 mx-auto w-full rounded-md mt-6 font-semibold ${
+          submitting ? "opacity-70 cursor-not-allowed" : ""
+        }`}
       >
-        Анкет илгээх
+        {submitting ? "Илгээж байна..." : "Анкет илгээх"}
       </button>
     </div>
   );
