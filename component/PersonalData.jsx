@@ -23,9 +23,9 @@ const PersonalData = ({ onChange, defaultValue = [], readOnly = false }) => {
   );
 
   const [formData, setFormData] = useState({
-    jobName: "adasdads",
-    lastName: "asdadsads",
-    fatherName: "asdads",
+    jobName: "",
+    lastName: "",
+    fatherName: "",
     myName: "",
     gender: "",
     birthYear: "",
