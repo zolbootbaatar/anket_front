@@ -88,8 +88,12 @@ const ApplicantDetail = () => {
 
         <Others defaultValue={data.others || {}} readOnly />
 
-        <BusDriverView value={data.busdriver || {}} readOnly />
-        <BusDriverDetails value={data.busdriver_details || {}} readOnly />
+        {data.type === "driver" ? (
+          <BusDriverView value={data.busdriver || {}} readOnly />
+        ) : null}
+        {data.type === "driver" ? (
+          <BusDriverDetails value={data.busdriver_details || {}} readOnly />
+        ) : null}
       </div>
     </div>
   );
