@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import Sidebar from "@/component/utils/Sidebar";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { AuthProvider } from "@/context/AuthProvider";
 
 export default function ClientLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -14,7 +15,7 @@ export default function ClientLayout({ children }) {
   };
 
   return (
-    <>
+    <AuthProvider>
       {pathname.includes("admin") ? (
         <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       ) : null}
@@ -47,6 +48,6 @@ export default function ClientLayout({ children }) {
         </button> */}
         {children}
       </div>
-    </>
+    </AuthProvider>
   );
 }

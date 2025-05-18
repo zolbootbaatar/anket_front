@@ -19,12 +19,14 @@ import {
   Menu as MenuIcon,
 } from "@mui/icons-material";
 import { useRouter, usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthProvider";
 
 const drawerWidth = 240;
 
 const Sidebar = ({ open, onClose }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   console.log("Current pathname:", pathname);
   console.log("Sidebar open state:", open);
@@ -44,9 +46,7 @@ const Sidebar = ({ open, onClose }) => {
       text: "Системээс гарах",
       icon: <ExitToApp />,
       onClick: () => {
-        // Add logout logic here
-        localStorage.removeItem("token");
-        router.push("/login");
+        logout();
       },
     },
   ];

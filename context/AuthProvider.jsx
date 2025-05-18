@@ -2,10 +2,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import apiData from "@/data/apidata";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
-import axiosInstance from "@/utils/api/axios";
+import axiosInstance, { axiosUrl } from "@/utils/api/axios";
+import apiData from "@/utils/api/apiData";
 
 const AuthContext = createContext(null);
 
@@ -24,17 +24,20 @@ export const AuthProvider = ({ children }) => {
 
   const login = async ({ email, password }) => {
     try {
-      const res = await axiosInstance.post(`${apiData.api_url}/user/login`, { email, password });
+      const res = await axiosInstance.post(`${apiData.api_url}/user/login`, {
+        email,
+        password,
+      });
       if (res.data.success) {
         setUser(res.data.user);
         localStorage.setItem("user_info", JSON.stringify(res.data.user));
         Cookies.set("user_info", JSON.stringify(res.data.user), { expires: 7 });
         localStorage.setItem("token", res.data.token);
-        Cookies.set("auth_token", res.data.token, { expires: 7, secure: true }); 
+        Cookies.set("auth_token", res.data.token, { expires: 7, secure: true });
         console.log("auth_token", res.data.token);
         toast.success("Амжилттай нэвтэрлээ!");
         setTimeout(() => {
-          router.push("/product");
+          router.push("/admin/user");
         }, 2000);
       }
     } catch (error) {
@@ -45,7 +48,10 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (registerData) => {
     try {
-      const res = await axios.post(`${apiData.api_url}/user/register`, registerData);
+      const res = await axios.post(
+        `${apiData.api_url}/user/register`,
+        registerData
+      );
       if (res.data.success) {
         setUser(res.data.user);
         localStorage.setItem("user_info", JSON.stringify(res.data.user));
@@ -66,8 +72,11 @@ export const AuthProvider = ({ children }) => {
         user: userInfo?._id,
         merchantId: userInfo?._id,
       };
-  
-      const res = await axios.post(`${apiData.api_url}/user/register`, dataWithUser);
+
+      const res = await axios.post(
+        `${apiData.api_url}/user/register`,
+        dataWithUser
+      );
       if (res.data.success) {
         toast.success("Хэрэглэгч амжилттай бүртгэгдлээ!");
       }
@@ -76,19 +85,19 @@ export const AuthProvider = ({ children }) => {
       alert("Бүртгэл хийхэд алдаа гарлаа.");
     }
   };
-  
-  
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user_info");
     localStorage.removeItem("token");
-    Cookies.remove("auth_token"); 
+    Cookies.remove("auth_token");
     router.push("/auth/login");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading ,signup , setUser}}>
+    <AuthContext.Provider
+      value={{ user, login, register, logout, loading, signup, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
