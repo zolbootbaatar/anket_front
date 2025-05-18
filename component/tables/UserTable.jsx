@@ -39,7 +39,7 @@ const UserTable = ({ datas, setDatas }) => {
     if (!confirm("Та энэ хэрэглэгчийн мэдээллийг устгахдаа итгэлтэй байна уу?"))
       return;
     try {
-      await axios.delete(`http://localhost:8000/api/v1/users/${id}`);
+      await axios.delete(`https://templateapi.xyz/anket/api/v1/users/${id}`);
       setDatas((prev) => prev.filter((item) => item._id !== id));
     } catch (error) {
       alert("Устгахад алдаа гарлаа!", error);

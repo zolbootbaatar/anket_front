@@ -39,7 +39,7 @@ const FilePreview = ({ onChange, defaultValue = [], readOnly = false }) => {
       <div className="flex flex-wrap gap-4 mt-6">
         {files.map((file, index) => {
           const imageUrl = file
-            ? `http://localhost:8000/${file}`
+            ? `https://templateapi.xyz/anket/${file}`
             : file?.preview
             ? file.preview
             : file instanceof File

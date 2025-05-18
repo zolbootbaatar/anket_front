@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -38,11 +38,12 @@ const FileInsert = ({ onChange, defaultValue = [], readOnly = false }) => {
 
       <div className="flex flex-wrap gap-4 mt-6">
         {files.map((file, index) => {
-          const imageUrl = readOnly && file?.path
-            ? `http://localhost:8000/${file.path}`
-            : file instanceof File
-            ? URL.createObjectURL(file)
-            : null;
+          const imageUrl =
+            readOnly && file?.path
+              ? `https://templateapi.xyz/anket/${file.path}`
+              : file instanceof File
+              ? URL.createObjectURL(file)
+              : null;
 
           return (
             <label
@@ -75,7 +76,9 @@ const FileInsert = ({ onChange, defaultValue = [], readOnly = false }) => {
                     height={40}
                     className="mb-1"
                   />
-                  <p className="text-white text-[12px] px-1 w-24">{imageLabels[index]}</p>
+                  <p className="text-white text-[12px] px-1 w-24">
+                    {imageLabels[index]}
+                  </p>
                 </>
               )}
             </label>

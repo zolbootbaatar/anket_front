@@ -44,7 +44,7 @@ export default function page() {
       }
 
       const res = await axios.post(
-        "http://localhost:8000/api/v1/applications",
+        "https://templateapi.xyz/anket/api/v1/applications",
         formData,
         {
           headers: {

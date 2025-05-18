@@ -19,7 +19,7 @@ const ApplicantDetail = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:8000/api/v1/applications/${id}`)
+        .get(`https://templateapi.xyz/anket/api/v1/applications/${id}`)
         .then((res) => setData(res.data.data))
         .catch((err) => console.error(err));
     }
