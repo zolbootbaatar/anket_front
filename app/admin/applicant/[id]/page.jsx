@@ -10,6 +10,7 @@ import Others from "@/component/OthersView";
 import FilePreview from "@/component/FilePreview";
 import BusDriverView from "@/component/BusDriverView";
 import BusDriverDetails from "@/component/BusDriverDetailView";
+import apiData from "@/utils/api/apiData";
 
 const ApplicantDetail = () => {
   const { id } = useParams();
@@ -59,6 +60,13 @@ const ApplicantDetail = () => {
       <div ref={contentRef}>
         <FilePreview defaultValue={data.files || []} readOnly />
 
+        <div className="border-2 border-dashed border-gray-300 rounded-md p-4 hover:border-[#233882] transition-colors">
+          <video
+            src={apiData.video_api_url + data.video}
+            controls
+            className="max-h-[200px] mb-2 rounded"
+          ></video>
+        </div>
         <PersonalData defaultValue={data.personal} readOnly />
 
         <FamilyType

@@ -56,11 +56,12 @@ export const AuthProvider = ({ children }) => {
         setUser(res.data.user);
         localStorage.setItem("user_info", JSON.stringify(res.data.user));
         toast.success("Амжилттай бүртгүүллээ!");
-        // router.push("/auth/login");
+        router.push("/auth/login");
       }
     } catch (error) {
       console.error("Бүртгэл хийхэд алдаа гарлаа:", error);
-      alert("Бүртгэл хийхэд алдаа гарлаа.");
+      toast.error("Бүртгэл хийхэд алдаа гарлаа.");
+      // alert("Бүртгэл хийхэд алдаа гарлаа.");
     }
   };
 

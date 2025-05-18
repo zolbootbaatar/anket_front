@@ -17,6 +17,7 @@ import {
   Assignment,
   ExitToApp,
   Menu as MenuIcon,
+  Newspaper,
 } from "@mui/icons-material";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthProvider";
@@ -41,6 +42,11 @@ const Sidebar = ({ open, onClose }) => {
       text: "Анкет",
       icon: <Assignment />,
       onClick: () => router.push("/admin/merchant"),
+    },
+    {
+      text: "Анкетийн хуудсын мэдээлэл",
+      icon: <Newspaper />,
+      onClick: () => router.push("/admin/systeminfo"),
     },
     {
       text: "Системээс гарах",
