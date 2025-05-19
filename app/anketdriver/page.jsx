@@ -13,7 +13,7 @@ import BusDriverDetails from "@/component/BusDriverDetail";
 import Education from "@/component/Education";
 import FamilyType from "@/component/FamilyType";
 import FileInsert from "@/component/FileInsert";
-import Others from "@/component/OthersView";
+import Others from "@/component/Others";
 import PersonalData from "@/component/PersonalData";
 import WorkExperience from "@/component/WorkExperience";
 import axios from "axios";

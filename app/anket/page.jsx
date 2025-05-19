@@ -4,7 +4,6 @@ import { FaLocationDot } from "react-icons/fa6";
 import Education from "@/component/Education";
 import FamilyType from "@/component/FamilyType";
 import FileInsert from "@/component/FileInsert";
-import Others from "@/component/OthersView";
 import PersonalData from "@/component/PersonalData";
 import WorkExperience from "@/component/WorkExperience";
 import apiData from "@/utils/api/apiData";
@@ -12,6 +11,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Others from "@/component/Others";
 
 export default function page() {
   const [dataA, setDataA] = useState({});
