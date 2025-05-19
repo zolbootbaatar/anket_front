@@ -78,7 +78,7 @@ const MerchantTable = ({ datas, setDatas }) => {
                 <strong>Хүйс</strong>
               </TableCell>
               <TableCell align="center">
-                <strong>Устгах</strong>
+                <strong>Дэлгэрэнгүй</strong>
               </TableCell>
             </TableRow>
           </TableHead>

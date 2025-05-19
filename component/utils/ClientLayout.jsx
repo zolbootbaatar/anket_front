@@ -29,8 +29,9 @@ export default function ClientLayout({ children }) {
         }}
       >
         {/* Temporary sidebar toggle button for debugging */}
-        {/* <button
+        <button
           onClick={toggleSidebar}
+          className="md:hidden"
           style={{
             position: "fixed",
             top: "10px",
@@ -44,8 +45,8 @@ export default function ClientLayout({ children }) {
             cursor: "pointer",
           }}
         >
-          {sidebarOpen ? "Сайдбар хаах" : "Сайдбар нээх"}
-        </button> */}
+          {sidebarOpen ? "Menu хаах" : "Menu нээх"}
+        </button>
         {children}
       </div>
     </AuthProvider>
